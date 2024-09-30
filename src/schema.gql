@@ -1,0 +1,18 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Alea types availables on the db"""
+type Alea {
+  """ID of an alea"""
+  id: ID!
+  name: String!
+  legend: String!
+  disponible: Boolean!
+  keywords: [String!]!
+}
+
+type Query {
+  aleas: [Alea!]!
+  alea(id: ID!): [Alea!]!
+}
