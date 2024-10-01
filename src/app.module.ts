@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AleasModule } from './aleas/aleas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { SeismesModule } from './seismes/seismes.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ConfigModule } from '@nestjs/config';
       },
     }),
     AleasModule,
+    SeismesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
