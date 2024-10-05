@@ -12,7 +12,39 @@ type Alea {
   keywords: [String!]!
 }
 
+type Source {
+  id: ID!
+  name: String!
+  adress: String!
+}
+
+"""Earthquakes """
+type Earthquake {
+  magnitude: Float!
+  id: Int!
+  premier_releve: DateTime!
+  dernier_releve: DateTime!
+  source: Source!
+  idFromSource: String!
+  lien_source: String!
+  nb_ressenti: Int!
+  visible: Boolean!
+  nb_stations: Int!
+  precision: Int!
+  type_magnitude: String!
+  profondeur_epicentre: Int!
+  tsunami: Boolean!
+  intensite: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   aleas: [Alea!]!
   alea(id: ID!): [Alea!]!
+  earthquakes: [Earthquake!]!
+  earthquake(id: ID!): [Earthquake!]!
 }

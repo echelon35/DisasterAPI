@@ -4,10 +4,10 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { AleasModule } from './aleas/aleas.module';
+import { AleasModule } from './Modules/aleas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { SeismesModule } from './seismes/seismes.module';
+import { EarthquakesModule } from './Modules/earthquakes.module';
 
 @Module({
   imports: [
@@ -29,7 +29,7 @@ import { SeismesModule } from './seismes/seismes.module';
       },
     }),
     AleasModule,
-    SeismesModule,
+    EarthquakesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

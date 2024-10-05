@@ -1,6 +1,6 @@
 import { Args, ID, Query, Resolver } from '@nestjs/graphql';
-import { Alea } from './entities/alea.entity/alea.entity';
-import { AleasService } from './aleas.service';
+import { Alea } from '../Domain/Model/alea.entity';
+import { AleasService } from '../Application/aleas.service';
 import { ParseIntPipe } from '@nestjs/common';
 
 @Resolver()

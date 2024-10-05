@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { Alea } from './entities/alea.entity/alea.entity';
+import { Alea } from '../Domain/Model/alea.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserInputError } from 'apollo-server-express';
 
