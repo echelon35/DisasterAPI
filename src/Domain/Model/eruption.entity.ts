@@ -1,3 +1,4 @@
+import { Geometry, Point } from 'geojson';
 import {
   Column,
   Entity,
@@ -5,14 +6,13 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { Source } from './source.entity';
-import { Point } from 'geojson';
 import * as pointQL from 'graphql-geojson-scalar-types';
+import { Field, ObjectType } from '@nestjs/graphql';
 
-@Entity('earthquakes')
-@ObjectType({ description: 'Earthquakes ' })
-export class Earthquake {
+@Entity('eruptions')
+@ObjectType({ description: 'Eruptions' })
+export class Eruption {
   @PrimaryGeneratedColumn()
   id: number;
   // alea: Alea;
@@ -22,9 +22,9 @@ export class Earthquake {
   @Column()
   dernier_releve: Date;
   @Column({ type: 'geometry' })
-  @Field((type) => pointQL.Point)
+  @Field(() => pointQL.Point)
   point: Point;
-  @ManyToOne((type) => Source, (source) => source.id)
+  @ManyToOne(() => Source, (source) => source.id)
   @JoinColumn({ name: 'source' })
   source: Source;
   @Column()
@@ -35,13 +35,9 @@ export class Earthquake {
   nb_ressenti: number;
   @Column({ default: true })
   visible: boolean;
-  nb_stations: number;
-  @Column({ type: 'float' })
-  @Field(() => Float)
-  magnitude: number;
-  precision: number;
-  type_magnitude: string;
-  profondeur_epicentre: number;
-  tsunami: boolean;
-  intensite: number;
+  @Column()
+  name: string;
+  @Column({ type: 'geometry' })
+  @Field(() => pointQL.Geometry)
+  surface: Geometry;
 }

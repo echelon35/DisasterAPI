@@ -8,6 +8,10 @@ import { AleasModule } from './Modules/aleas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { EarthquakesModule } from './Modules/earthquakes.module';
+import { Geometry, MultiLineString, Point } from 'graphql-geojson-scalar-types';
+import { FloodsModule } from './Modules/floods.module';
+import { HurricanesModule } from './Modules/hurricanes.module';
+import { EruptionsModule } from './Modules/eruptions.module';
 
 @Module({
   imports: [
@@ -27,9 +31,17 @@ import { EarthquakesModule } from './Modules/earthquakes.module';
       buildSchemaOptions: {
         numberScalarMode: 'integer',
       },
+      resolvers: {
+        GeoJSONPointScalar: Point,
+        GeoJSONGeometryScalar: Geometry,
+        GeoJSONMultiLineStringScalar: MultiLineString,
+      },
     }),
     AleasModule,
     EarthquakesModule,
+    FloodsModule,
+    HurricanesModule,
+    EruptionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

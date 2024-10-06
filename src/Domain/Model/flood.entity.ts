@@ -1,3 +1,4 @@
+import { Geometry, Point } from 'geojson';
 import {
   Column,
   Entity,
@@ -5,14 +6,13 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { Source } from './source.entity';
-import { Point } from 'geojson';
 import * as pointQL from 'graphql-geojson-scalar-types';
+import { Field, ObjectType } from '@nestjs/graphql';
 
-@Entity('earthquakes')
-@ObjectType({ description: 'Earthquakes ' })
-export class Earthquake {
+@Entity('floods')
+@ObjectType({ description: 'Floods ' })
+export class Flood {
   @PrimaryGeneratedColumn()
   id: number;
   // alea: Alea;
@@ -35,13 +35,8 @@ export class Earthquake {
   nb_ressenti: number;
   @Column({ default: true })
   visible: boolean;
-  nb_stations: number;
-  @Column({ type: 'float' })
-  @Field(() => Float)
-  magnitude: number;
-  precision: number;
-  type_magnitude: string;
-  profondeur_epicentre: number;
-  tsunami: boolean;
-  intensite: number;
+  niveau_alerte: number;
+  @Column({ type: 'geometry', nullable: true })
+  @Field((type) => pointQL.Geometry)
+  surface: Geometry;
 }
