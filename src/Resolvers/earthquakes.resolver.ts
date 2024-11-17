@@ -12,7 +12,7 @@ export class EarthquakesResolver {
     return this.earthquakeService.findAll();
   }
 
-  @Query(() => [Earthquake], { name: 'earthquake' })
+  @Query(() => Earthquake, { name: 'earthquake' })
   async FindOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
     return this.earthquakeService.findOne(id);
   }

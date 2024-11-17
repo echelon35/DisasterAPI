@@ -101,7 +101,7 @@ type Query {
   aleas: [Alea!]!
   alea(id: ID!): [Alea!]!
   earthquakes: [Earthquake!]!
-  earthquake(id: ID!): [Earthquake!]!
+  earthquake(id: ID!): Earthquake!
   floods: [Flood!]!
   flood(id: ID!): [Flood!]!
   hurricanes: [Hurricane!]!
