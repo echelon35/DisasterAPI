@@ -103,7 +103,7 @@ type Query {
   earthquakes: [Earthquake!]!
   earthquake(id: ID!): Earthquake!
   floods: [Flood!]!
-  flood(id: ID!): [Flood!]!
+  flood(id: ID!): Flood!
   hurricanes: [Hurricane!]!
   hurricane(id: ID!): [Hurricane!]!
   eruptions: [Eruption!]!

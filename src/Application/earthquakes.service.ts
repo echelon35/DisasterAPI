@@ -16,9 +16,11 @@ export class EarthquakesService {
   }
 
   async findOne(id: number) {
-    const earthquake = await this.earthquakeRepository.findOne({
-      where: { id },
-    });
+    const earthquake = this.earthquakeRepository
+      .createQueryBuilder('earthquake')
+      .leftJoinAndSelect('earthquake.source', 'source')
+      .where({ id: id })
+      .getOne();
     if (!earthquake) {
       throw new UserInputError(`Earthquake ${id} does not exist`);
     }

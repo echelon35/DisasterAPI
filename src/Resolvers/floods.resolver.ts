@@ -12,7 +12,7 @@ export class FloodsResolver {
     return this.floodService.findAll();
   }
 
-  @Query(() => [Flood], { name: 'flood' })
+  @Query(() => Flood, { name: 'flood' })
   async FindOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
     return this.floodService.findOne(id);
   }

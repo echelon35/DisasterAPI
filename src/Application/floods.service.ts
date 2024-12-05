@@ -16,9 +16,11 @@ export class FloodsService {
   }
 
   async findOne(id: number) {
-    const flood = await this.floodRepository.findOne({
-      where: { id },
-    });
+    const flood = this.floodRepository
+      .createQueryBuilder('flood')
+      .leftJoinAndSelect('flood.source', 'source')
+      .where({ id: id })
+      .getOne();
     if (!flood) {
       throw new UserInputError(`Flood ${id} does not exist`);
     }
