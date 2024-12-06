@@ -1,9 +1,11 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Field, Float, ObjectType } from '@nestjs/graphql';
 import { Source } from './source.entity';
@@ -22,9 +24,9 @@ export class Earthquake {
   @Column()
   dernier_releve: Date;
   @Column({ type: 'geometry' })
-  @Field((type) => pointQL.Point)
+  @Field(() => pointQL.Point)
   point: Point;
-  @ManyToOne((type) => Source, (source) => source.id)
+  @ManyToOne(() => Source, (source) => source.id)
   @JoinColumn({ name: 'source' })
   source: Source;
   @Column()
@@ -44,4 +46,16 @@ export class Earthquake {
   profondeur_epicentre: number;
   tsunami: boolean;
   intensite: number;
+  @CreateDateColumn({
+    type: 'timestamp without time zone',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+  @UpdateDateColumn({
+    type: 'timestamp without time zone',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 }

@@ -36,6 +36,8 @@ type Earthquake {
   profondeur_epicentre: Int!
   tsunami: Boolean!
   intensite: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 scalar GeoJSONPointScalar
@@ -48,7 +50,7 @@ scalar DateTime
 """Floods """
 type Flood {
   point: GeoJSONPointScalar!
-  surface: GeoJSONGeometryScalar!
+  surface: GeoJSONGeometryScalar
   id: Int!
   premier_releve: DateTime!
   dernier_releve: DateTime!
@@ -58,6 +60,8 @@ type Flood {
   nb_ressenti: Int!
   visible: Boolean!
   niveau_alerte: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 scalar GeoJSONGeometryScalar
@@ -65,9 +69,9 @@ scalar GeoJSONGeometryScalar
 """Hurricanes"""
 type Hurricane {
   point: GeoJSONPointScalar!
-  path: GeoJSONMultiLineStringScalar!
-  surface: GeoJSONGeometryScalar!
-  forecast: GeoJSONGeometryScalar!
+  path: GeoJSONMultiLineStringScalar
+  surface: GeoJSONGeometryScalar
+  forecast: GeoJSONGeometryScalar
   id: Int!
   premier_releve: DateTime!
   dernier_releve: DateTime!
@@ -78,6 +82,8 @@ type Hurricane {
   visible: Boolean!
   name: String!
   vitesse_max: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 scalar GeoJSONMultiLineStringScalar
@@ -85,7 +91,7 @@ scalar GeoJSONMultiLineStringScalar
 """Eruptions"""
 type Eruption {
   point: GeoJSONPointScalar!
-  surface: GeoJSONGeometryScalar!
+  surface: GeoJSONGeometryScalar
   id: Int!
   premier_releve: DateTime!
   dernier_releve: DateTime!
@@ -95,6 +101,8 @@ type Eruption {
   nb_ressenti: Int!
   visible: Boolean!
   name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Query {
@@ -105,7 +113,7 @@ type Query {
   floods: [Flood!]!
   flood(id: ID!): Flood!
   hurricanes: [Hurricane!]!
-  hurricane(id: ID!): [Hurricane!]!
+  hurricane(id: ID!): Hurricane!
   eruptions: [Eruption!]!
-  eruption(id: ID!): [Eruption!]!
+  eruption(id: ID!): Eruption!
 }

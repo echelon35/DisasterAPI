@@ -1,10 +1,12 @@
 import { Geometry, Point } from 'geojson';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Source } from './source.entity';
 import * as pointQL from 'graphql-geojson-scalar-types';
@@ -38,6 +40,18 @@ export class Eruption {
   @Column()
   name: string;
   @Column({ type: 'geometry' })
-  @Field(() => pointQL.Geometry)
+  @Field(() => pointQL.Geometry, { nullable: true })
   surface: Geometry;
+  @CreateDateColumn({
+    type: 'timestamp without time zone',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+  @UpdateDateColumn({
+    type: 'timestamp without time zone',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 }

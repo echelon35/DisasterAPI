@@ -16,9 +16,11 @@ export class HurricanesService {
   }
 
   async findOne(id: number) {
-    const hurricane = await this.hurricaneRepository.findOne({
-      where: { id },
-    });
+    const hurricane = this.hurricaneRepository
+      .createQueryBuilder('hurricane')
+      .leftJoinAndSelect('hurricane.source', 'source')
+      .where({ id: id })
+      .getOne();
     if (!hurricane) {
       throw new UserInputError(`Hurricane ${id} does not exist`);
     }

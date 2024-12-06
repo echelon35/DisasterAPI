@@ -12,7 +12,7 @@ export class HurricanesResolver {
     return this.hurricaneService.findAll();
   }
 
-  @Query(() => [Hurricane], { name: 'hurricane' })
+  @Query(() => Hurricane, { name: 'hurricane' })
   async FindOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
     return this.hurricaneService.findOne(id);
   }

@@ -16,9 +16,11 @@ export class EruptionsService {
   }
 
   async findOne(id: number) {
-    const eruption = await this.eruptionRepository.findOne({
-      where: { id },
-    });
+    const eruption = this.eruptionRepository
+      .createQueryBuilder('eruption')
+      .leftJoinAndSelect('eruption.source', 'source')
+      .where({ id: id })
+      .getOne();
     if (!eruption) {
       throw new UserInputError(`Eruption ${id} does not exist`);
     }

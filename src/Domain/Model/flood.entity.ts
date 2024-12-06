@@ -1,10 +1,12 @@
 import { Geometry, Point } from 'geojson';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Source } from './source.entity';
 import * as pointQL from 'graphql-geojson-scalar-types';
@@ -22,9 +24,9 @@ export class Flood {
   @Column()
   dernier_releve: Date;
   @Column({ type: 'geometry' })
-  @Field((type) => pointQL.Point)
+  @Field(() => pointQL.Point)
   point: Point;
-  @ManyToOne((type) => Source, (source) => source.id)
+  @ManyToOne(() => Source, (source) => source.id)
   @JoinColumn({ name: 'source' })
   source: Source;
   @Column()
@@ -37,6 +39,18 @@ export class Flood {
   visible: boolean;
   niveau_alerte: number;
   @Column({ type: 'geometry', nullable: true })
-  @Field((type) => pointQL.Geometry)
+  @Field(() => pointQL.Geometry, { nullable: true })
   surface: Geometry;
+  @CreateDateColumn({
+    type: 'timestamp without time zone',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+  @UpdateDateColumn({
+    type: 'timestamp without time zone',
+    nullable: true,
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 }

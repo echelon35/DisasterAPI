@@ -12,7 +12,7 @@ export class EruptionsResolver {
     return this.eruptionService.findAll();
   }
 
-  @Query(() => [Eruption], { name: 'eruption' })
+  @Query(() => Eruption, { name: 'eruption' })
   async FindOne(@Args('id', { type: () => ID }, ParseIntPipe) id: number) {
     return this.eruptionService.findOne(id);
   }
