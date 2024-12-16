@@ -29,6 +29,7 @@
     "@nestjs/typeorm": "^10.0.2",
     "@types/geojson": "^7946.0.14",
     "apollo-server-express": "^3.13.0",
+    "disaster-models": "^1.0.4",
     "graphql": "^16.9.0",
     "graphql-geojson-scalar-types": "^0.1.0",
     "graphql-type-json": "^0.3.2",

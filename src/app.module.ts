@@ -4,14 +4,17 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { AleasModule } from './Modules/aleas.module';
+// import { AleasModule } from './Modules/aleas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { EarthquakesModule } from './Modules/earthquakes.module';
-import { Geometry, MultiLineString, Point } from 'graphql-geojson-scalar-types';
-import { FloodsModule } from './Modules/floods.module';
-import { HurricanesModule } from './Modules/hurricanes.module';
-import { EruptionsModule } from './Modules/eruptions.module';
+import { Point } from 'graphql-geojson-scalar-types';
+import { Earthquake } from './Domain/Model/earthquake.entity';
+import { Source } from './Domain/Model/source.entity';
+import { City, Country } from 'disaster-models';
+// import { FloodsModule } from './Modules/floods.module';
+// import { HurricanesModule } from './Modules/hurricanes.module';
+// import { EruptionsModule } from './Modules/eruptions.module';
 
 @Module({
   imports: [
@@ -23,7 +26,8 @@ import { EruptionsModule } from './Modules/eruptions.module';
       username: process.env.DISASTER_API_DB_USER,
       password: process.env.DISASTER_API_DB_PASSWORD,
       database: process.env.DISASTER_API_DB_NAME,
-      autoLoadEntities: true,
+      entities: [Earthquake, Source, City, Country],
+      // autoLoadEntities: true,
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -33,15 +37,9 @@ import { EruptionsModule } from './Modules/eruptions.module';
       },
       resolvers: {
         GeoJSONPointScalar: Point,
-        GeoJSONGeometryScalar: Geometry,
-        GeoJSONMultiLineStringScalar: MultiLineString,
       },
     }),
-    AleasModule,
     EarthquakesModule,
-    FloodsModule,
-    HurricanesModule,
-    EruptionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
